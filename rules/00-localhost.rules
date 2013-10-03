@@ -1,0 +1,4 @@
+# 127.0.0.1 -> granted
+*filter
+-A INPUT -i lo -j ACCEPT -m comment --comment "There is no place like localhost"
+COMMIT

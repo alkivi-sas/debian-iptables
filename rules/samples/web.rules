@@ -1,0 +1,11 @@
+#
+#   Allow 80 and 443
+#
+*filter
+
+# tcp port 443
+-A INPUT -p tcp --dport 80  -j ACCEPT -m comment --comment "web http"
+-A INPUT -p tcp --dport 443 -j ACCEPT -m comment --comment "web https"
+
+COMMIT
+

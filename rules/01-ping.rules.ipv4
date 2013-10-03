@@ -1,0 +1,4 @@
+# Allow ping by default
+*filter
+-A INPUT -p icmp -j ACCEPT -m comment --comment "ping ... ping"
+COMMIT

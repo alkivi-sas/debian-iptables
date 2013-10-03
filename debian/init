@@ -1,0 +1,96 @@
+#!/bin/bash
+### BEGIN INIT INFO
+# Provides:          alkivi-iptables
+# Required-Start:    $network $syslog $local_fs
+# Required-Stop:     $network $syslog $local_fs
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: Apply rules placed in /etc/iptables.d to iptables
+# Description: All rules matching *.rules(.{ipv4|ipv6})? will be applied
+### END INIT INFO
+
+PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
+NAME='alkivi-iptables'
+DESC='iptables rules easy-loading'
+IPTABLES_CONFIG_DIR=/etc/iptables.d
+
+iptables_start()
+{
+    echo "Loading IPv4 rules : "
+
+    # First remove all existing rules
+    iptables -t raw -F 
+    iptables -t nat -F 
+    iptables -t mangle -F 
+    iptables -t filter -F 
+
+    # The script need to return 1 in case of failure
+    RESULT=0
+
+    # Add rules
+    for rule in `ls $IPTABLES_CONFIG_DIR/*.rules $IPTABLES_CONFIG_DIR/*.rules.ipv4 2> /dev/null` ; do
+        echo $rule
+        iptables-restore -n < $rule || RESULT=1 ; 
+    done
+    echo ""
+
+    return $RESULT ;
+}
+
+ip6tables_start()
+{
+    echo "Loading IPv6 rules : "
+
+    # First remove all existing rules
+    ip6tables -t raw -F
+    ip6tables -t mangle -F
+    ip6tables -t filter -F
+
+    # The script need to return 1 in case of failure
+    RESULT=0
+
+    # Add rules
+    for i in `ls $IPTABLES_CONFIG_DIR/*.rules $IPTABLES_CONFIG_DIR/*.rules.ipv6 2> /dev/null` ; do
+        echo $i 
+        ip6tables-restore -n < $i || RESULT=1 ; 
+    done
+    echo ""
+
+    return $RESULT ;
+}
+
+do_start()
+{
+    iptables_start && ip6tables_start
+}
+
+do_stop()
+{
+    return 0
+}
+
+case "$1" in
+    start)
+        echo "Starting $DESC" "$NAME..."
+        do_start
+        case "$?" in
+            0)   echo "Starting $DESC $NAME succeeded" ;;
+            *)   echo "Starting $DESC $NAME failed, check above for failures." ;;
+        esac
+        ;;
+    stop)
+        echo "Cannot call stop on $NAME."
+        ;;
+    restart|force-reload)
+        echo "Restarting $DESC" "$NAME..."
+        do_start
+        case "$?" in
+            0)   echo "Restarting $DESC $NAME succeeded" ;;
+            *)   echo "Restarting $DESC $NAME failed, check above for failures." ;;
+        esac
+        ;;
+    *)
+        echo "Usage: $0 {start|stop|restart|force-reload}" >&2
+        exit 3
+    ;;
+esac

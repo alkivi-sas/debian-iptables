@@ -1,0 +1,15 @@
+#
+#	Masquarate for vpn
+#
+*filter
+
+# udp port 1194
+-A INPUT -p udp --dport 1194 -j ACCEPT -m comment --comment "openvpn"
+
+COMMIT
+
+*nat
+
+-A POSTROUTING -s 10.8.0.0/24 -o eth0 -m comment --comment "vpn" -j MASQUERADE
+
+COMMIT

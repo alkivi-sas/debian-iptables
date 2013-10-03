@@ -1,0 +1,7 @@
+rules/00-localhost.rules etc/iptables.d
+rules/01-ping.rules.ipv4 etc/iptables.d
+rules/01-ping.rules.ipv6 etc/iptables.d
+rules/01-existing-connections.rules etc/iptables.d
+rules/99-default.rules etc/iptables.d
+rules/99-default.rules.ipv4 etc/iptables.d
+rules/90-denied.rules etc/iptables.d
