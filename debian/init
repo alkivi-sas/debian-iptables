@@ -1,8 +1,8 @@
 #!/bin/bash
 ### BEGIN INIT INFO
 # Provides:          alkivi-iptables
-# Required-Start:    $network $syslog $local_fs
-# Required-Stop:     $network $syslog $local_fs
+# Required-Start:    $network $syslog $local_fs $remote_fs
+# Required-Stop:     $network $syslog $local_fs $remote_fs
 # Default-Start:     2 3 4 5
 # Default-Stop:      0 1 6
 # Short-Description: Apply rules placed in /etc/iptables.d to iptables

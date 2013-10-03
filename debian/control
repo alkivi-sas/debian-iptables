@@ -2,10 +2,12 @@ Source: alkivi-iptables
 Section: misc
 Priority: extra
 Maintainer: Anthony Martinet <anthony@alkivi.fr>
-Build-Depends: debhelper (>= 8)
+Build-Depends: debhelper (>= 7)
 Standards-Version: 3.7.3
 Homepage: http://www.alkivi.fr
+
 Package: alkivi-iptables
 Architecture: all
 Depends: iptables
-Description: Manage iptables using /etc/iptables.d and a usefull service to reload rules
+Description: Manage iptables using /etc/iptables.d and a useful service to reload rules
+ Add useful service to reload quickly iptables rules for a server

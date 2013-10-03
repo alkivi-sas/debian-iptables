@@ -1,5 +1,23 @@
+alkivi-iptables (1.0-4) wheezy; urgency=low
+
+  * Final touch before github release 
+
+ -- Anthony Martinet <anthony@alkivi.fr>  Thu, 03 Oct 2013 15:43:48 +0200
+
+alkivi-iptables (1.0-3) wheezy; urgency=low
+
+  * Fix in init.d script to be more flexible ?
+
+ -- Anthony Martinet <anthony@alkivi.fr>  Thu, 03 Oct 2013 15:26:36 +0200
+
+alkivi-iptables (1.0-2) wheezy; urgency=low
+
+  * Various useless fix
+
+ -- Anthony Martinet <anthony@alkivi.fr>  Thu, 01 Oct 2013 15:25:39 +0200
+
 alkivi-iptables (1.0-1) wheezy; urgency=low
 
   * Initial release
 
- -- Anthony Martinet <anthony@alkivi.fr>  Mon, 31 Jun 2013 10:42:44 +0100
+ -- Anthony Martinet <anthony@alkivi.fr>  Thu, 01 Oct 2013 14:25:39 +0200
